@@ -1,4 +1,8 @@
 <?php
+session_start();
+if (isset($_SESSION['username'])) {
+    header("Location: dashboard.php");
+}
 $errors = []; // setting this variable for user's error
 define('ERROR_MSG', 'This field is required');
 require_once "valid.php";
@@ -59,6 +63,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $errors['dob'] = ERROR_MSG;
     }
 
+    if (!$address) {
+        $errors['address'] = ERROR_MSG;
+    }
+
     if (!$telephone) {
         $errors['phone_number'] = ERROR_MSG;
     }
@@ -102,6 +110,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     .error {
         color: red;
     }
+
+    .border-red {
+        border: 1px solid red;
+    }
     </style>
 </head>
 
@@ -109,55 +121,63 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     <h2>Register Here</h2>
     <form action="" method="post">
         <label for="">Firstname</label><br>
-        <input type="text" name="firstname" class="" value="<?php echo $firstname ?? "" ?>">
+        <input type="text" name="firstname" class="<?php echo isset($errors['firstname']) ? 'border-red' : "" ?>"
+            value="<?php echo $firstname ?? "" ?>">
         <small class="error">
             <?= $errors['firstname'] ?? '' ?>
         </small>
         <br>
         <label for="">Lastname</label><br>
-        <input type="text" name="lastname" value="<?= $lastname ?? '' ?>">
+        <input type="text" name="lastname" class="<?php echo isset($errors['lastname']) ? 'border-red' : "" ?>"
+            value="<?= $lastname ?? '' ?>">
         <small class="error">
             <?= $errors['lastname'] ?? '' ?>
         </small>
         <br>
         <label for="">Username</label><br>
-        <input type="text" name="username" value="<?= $username ?? '' ?>">
+        <input type="text" name="username" class="<?php echo isset($errors['username']) ? 'border-red' : "" ?>"
+            value="<?= $username ?? '' ?>">
         <small class="error">
             <?= $errors['username'] ?? '' ?>
         </small>
         <br>
         <label for="">Email</label><br>
-        <input type="text" name="email" value="<?= $email ?? '' ?>">
+        <input type="text" name="email" class="<?php echo isset($errors['email']) ? 'border-red' : "" ?>"
+            value="<?= $email ?? '' ?>">
         <small class="error">
             <?= $errors['email'] ?? '' ?>
         </small>
         <br>
         <label for="">Password</label><br>
-        <input type="password" name="password" value="">
+        <input type="password" name="password" class="<?php echo isset($errors['password']) ? 'border-red' : "" ?>"
+            value="">
         <small class="error">
             <?= $errors['password'] ?? '' ?>
         </small>
         <br>
         <label for="">Repeat Password</label><br>
-        <input type="password" name="cpass" id="">
+        <input type="password" name="cpass" class="<?php echo isset($errors['cpass']) ? 'border-red' : "" ?>" id="">
         <small class="error">
             <?= $errors['cpass'] ?? '' ?>
         </small>
         <br>
         <label for="">Address</label><br>
-        <input type="text" name="address" value="<?= $address ?? '' ?>">
+        <input type="text" name="address" class="<?php echo isset($errors['address']) ? 'border-red' : "" ?>"
+            value="<?= $address ?? '' ?>">
         <small class="error">
             <?= $errors['address'] ?? '' ?>
         </small>
         <br>
         <label for="">Date of Birth</label><br>
-        <input type="date" name="dob" value="<?= $dob ?? '' ?>">
+        <input type="date" name="dob" class="<?php echo isset($errors['dob']) ? 'border-red' : "" ?>"
+            value="<?= $dob ?? '' ?>">
         <small class="error">
             <?= $errors['dob'] ?? '' ?>
         </small>
         <br>
         <label for="">Telephone</label><br>
-        <input type="number" name="phone_number" value="<?= $telephone ?? '' ?>">
+        <input type="number" name="phone_number"
+            class="<?php echo isset($errors['phone_number']) ? 'border-red' : "" ?>" value="<?= $telephone ?? '' ?>">
         <small class="error">
             <?= $errors['phone_number'] ?? '' ?>
         </small>

@@ -1,5 +1,8 @@
 <?php
 session_start();
+if (isset($_SESSION['username'])) {
+    header("Location: dashboard.php");
+}
 require_once "valid.php";
 ini_set("error_report", 1);
 $errors = [];

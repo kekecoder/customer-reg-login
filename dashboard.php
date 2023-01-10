@@ -25,27 +25,26 @@ $result = $query->fetchAll();
     <title>Dashboard</title>
 
 </head>
-<h1>Welcome <?= $_SESSION['firstname'] . ' ' . $_SESSION['lastname'] ?> </h1>
-<table>
+<h1>Welcome <?= ucfirst($_SESSION['firstname']) . ' ' . ucfirst($_SESSION['lastname']) ?> </h1>
+<table border="2">
     <tr>
         <th>First Name</th>
         <th>Last Name</th>
         <th>Username</th>
         <th>Email</th>
-        <th>Password</th>
+        <th>Address</th>
         <th>Date of Birth</th>
         <th>Telephone</th>
     </tr>
     <?php foreach ($result as $row) : ?>
     <tr>
-        <td><?= $row['firstname'] ?></td>
-        <td><?= $row['lastname'] ?></td>
-        <td><?= $row['username'] ?></td>
+        <td><?= ucfirst($row['firstname']) ?></td>
+        <td><?= ucfirst($row['lastname']) ?></td>
+        <td><?= ucfirst($row['username']) ?></td>
         <td><?= $row['email'] ?></td>
-        <td><?= $_SESSION['password'] ?></td>
-        <td><?= $row['address'] ?></td>
-        <td><?= $row['dob'] ?></td>
-        <td><?= $row['telephone'] ?></td>
+        <td><?= ucfirst($row['address']) ?></td>
+        <td><?= ucfirst($row['dob']) ?></td>
+        <td><?= ucfirst($row['telephone']) ?></td>
     </tr>
 
 
